@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        body{
+            background-color: grey;
+        }
+        .container{
+            background-color: rgb(196, 248, 255);
+
+              width:650px;
+             height: 640px; 
+
+            margin: 50px  auto; 
+             border: 2px solid blue;
+           
+        }
+        h1 {
+            font-size: 26px;
+              margin: 20px 10px; 
+             
+        }
+
+        .formdesign {
+             font-size: 20px;
+            padding: 40px  auto;
+           
+            margin:10px 110px ; 
+        }
+
+        .formdesign input {
+             width: 55%;
+            padding: 12px 20; 
+            border: 1px solid blue;
+             margin: 14px; 
+            border-radius: 4px;
+            font-size: 15px; 
+        }
+         #name,#email,#phone{
+            width: 90%;
+        }
+        #cpass input{
+            width: 51%;
+
+        }
+        #c-d input{
+            width: 62%;
+
+        }
+        #cnic{
+            width:83%
+        } 
+       
+
+        .formerror {
+            color: red;
+        }
+
+        .btn {
+             
+           margin-left: 240px;   
+            padding: 10px;
+            width: 150px; 
+             border: 2px solid black; 
+            text-align: center;
+             margin-top: 25px; 
+            background-image: linear-gradient(180deg, rgb(82, 126, 247), rgb(0, 255, 234));
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <h1>WELLCOME TO OUR ONLINE VOTING WEBSITE!</h1>
+    <hr>
+    <form action="/myaction.php" name="myForm" onsubmit="return  validateForm()" method="post">
+        <div class="formdesign" id="name">
+            Name:<input type="text" name="fname" >
+            <b><div class="formerror"></div></b>
+        </div>
+        <div class="formdesign" id="email">
+            Email:<input type="email" name="femail">
+
+            <b><div class="formerror"></div></b>
+        </div>
+        <div class="formdesign" id="phone">
+            Phone:<input type="phone" name="fphone">
+
+            <b><div class="formerror"></div></b>
+        </div>
+        <div class="formdesign" id="cnic">
+           CNIC no:<input type="text" name="cnic">
+            <b><div class="formerror"></div></b>
+        </div>
+        <div class="formdesign" id="c-d">
+           City-District:<input type="text" name="c-d">
+
+            <b><div class="formerror"></div> </b>
+        </div>
+        <div class="formdesign" id="cpass">
+            Confirm password:<input type="password" name="cpass">
+            <b><div class="formerror"></div></b>
+        </div>
+        <input class="btn" type="submit" value="Submit">
+    </form>
+</div>
+    <Script>
+        function clearErrors(){
+            errors = document.getElementByClassName('formerror') 
+            for(let item of errors){
+                item.innerHTML ="";
+            }
+        }
+//  if the required information is true then to remove the given error correction is hidden by this function
+        function seterror(id , error) {
+            // set error inside tag of id
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+        }
+        function validateForm() {
+            let returnval = true;
+            // perform validation if validation is false ,set the value validation false
+
+                                            // (one)
+
+            let name = document.forms['myForm']["fname"].value;
+            // if (name =="") {
+                //     seterror("name", "*Name should be mention")
+                //     returnval = false;
+                // }
+                if (name.length<4) {
+                    seterror("name", "*Length of name is too short!")
+                    returnval = false;
+                }
+                if (name ==0) {
+                    seterror("name", "*Name should be mention!")
+                    returnval = false;
+                }
+                                     //  (two)
+                let email = document.forms['myForm']["femail"].value;
+                if (email.length>20) {
+                    seterror("email", "*Length of Email is too long!")
+                    returnval = false;
+                }
+                if (email ==0) {
+                    seterror("email", "*Email should be  mention! ")
+                    returnval = false;
+                }
+                                 //  (three)
+                let phone = document.forms['myForm']["fphone"].value;
+                if (phone.length<11) {
+                    seterror("phone", "*Phone no should contains 11 digits!")
+                    returnval = false;
+                }
+                if ( phone ==0) {
+                    seterror("phone", "*Phone no should be  mention! ")
+                    returnval = false;
+                }
+                                        // (four)
+                let pass = document.forms['myForm']["pass"].value;
+                if (pass.length<8) {
+                    seterror("pass", "*Password should contains 8 digits!")
+                    returnval = false;
+                }
+                if (pass == 0) {
+                    seterror("pass", "*Password should be mention!")
+                    returnval = false;
+                }
+                                        //  (five)
+                let cpass = document.forms['myForm']["cpass"].value;
+                if (cpass != pass) {
+                    seterror("cpass", "*Confirm Password should match!")
+                    returnval = false;
+                }
+                                             // (SIX)
+                let cnic = document.forms['myForm']["cnic"].value;
+                if (cnic>15) {
+                    seterror("cnic", "*CNIC no is too long!")
+                    returnval = false;
+                }
+                if (cnic ==0) {
+                    seterror("cnic", "*CNIC no should be mention!")
+                    returnval = false;
+                }
+
+
+            // if we write return false then it doesn't submit the form but if we write return true then it submit the the form 
+            return returnval;
+        }
+    </Script>
+       
+</body>
+
+</html>
